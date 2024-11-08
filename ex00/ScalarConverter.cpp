@@ -3,6 +3,7 @@
 
 void ScalarConverter::convert(std::string str)
 {
+    char    valuec = 0;
     int     valuei = 0;
     float   valuef = 0;
     double  valued = 0;
@@ -10,11 +11,25 @@ void ScalarConverter::convert(std::string str)
     bool    i = false;
     bool    f = false;
     bool    d = false;
+    bool    special = false;
 
     // need to have a check for if string is a mixture of chars and ints, or all chars // MORE THAN ONE CHAR or ONE CHAR NOT AT END
     // nan
     // inf
+    // need to handle overflow (out of range exceptions)
+    
+    if (str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf")
+    {
+        special = true;
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
 
+        std::cout << "float: " << str << std::endl;  // need to sort out these two lines and do nan
+        std::cout << "double: " << str << std::endl;
+    }
+
+
+    // GET TYPES
     if (str.find('.') != std::string::npos)
     {
         if (str.find('f') == str.length() - 1)
@@ -32,11 +47,31 @@ void ScalarConverter::convert(std::string str)
     }
     else
     {
-        std::cout << "literal type is int or char" << std::endl;
-        i = true;
-        valuei = std::stoi(str); 
+        try
+        {
+            valuei = std::stoi(str);
+            i = true;
+            std::cout << "literal type is int" << std::endl;
+        }
+        catch (const std::invalid_argument& e) // CAST AND PRINT CHARS
+        {
+            valuec = str[0];
+            if (str.length() == 1)
+                std::cout << "char: '" << valuec << "'" << std::endl;
+            else
+            {
+                if (special == false)
+                    std::cout << "Error: Cannot convert a string of characters" << std::endl;
+                exit (1);
+            }
+            std::cout << "literal type is char" << std::endl;
+            std::cout << "int: " << static_cast<int>(valuec) << std::endl;
+            std::cout << "float: " << static_cast<float>(valuec) << ".0f" << std::endl;
+            std::cout << "double: " << static_cast<double>(valuec) << ".0" << std::endl;
+        }
     }
 
+    // CAST AND PRINT INTS, FLOATS AND DOUBLES
     if (i)
     {
         if (std::isprint(valuei))
