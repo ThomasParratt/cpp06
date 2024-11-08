@@ -6,12 +6,12 @@
 class ScalarConverter
 {
     private:
-        
-    public:
+        ScalarConverter();
         // ScalarConverter();
         // ScalarConverter(const ScalarConverter& obj);
         // ~ScalarConverter();
         // ScalarConverter&  operator=(const ScalarConverter& obj);
+    public:
         static void convert(std::string str);
 };
 

@@ -1,7 +1,12 @@
 #include "ScalarConverter.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
-    ScalarConverter::convert("0");
-    ScalarConverter::convert("42.0f");
+    if (argc == 2)
+    {
+        std::string arg = argv[1];
+        ScalarConverter::convert(arg);
+    }
+    else
+        std::cout << "Incorrect number of arguments" << std::endl;
 }
