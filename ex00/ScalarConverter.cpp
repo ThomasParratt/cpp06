@@ -1,8 +1,17 @@
 #include "ScalarConverter.hpp"
 #include <cmath>
+#include <limits>
 
 void ScalarConverter::convert(std::string str)
 {
+    std::cout << "Max int: " << std::numeric_limits<int>::max() << std::endl;
+    std::cout << "Max float: " << std::numeric_limits<float>::max() << std::endl;
+    std::cout << "Max double: " << std::numeric_limits<double>::max() << std::endl;
+
+    std::cout << "Min int: " << std::numeric_limits<int>::min() << std::endl;
+    std::cout << "Min float: " << std::numeric_limits<float>::min() << std::endl;
+    std::cout << "Min double: " << std::numeric_limits<double>::min() << std::endl << std::endl;
+
     char    valuec = 0;
     int     valuei = 0;
     float   valuef = 0;
@@ -68,6 +77,10 @@ void ScalarConverter::convert(std::string str)
             std::cout << "int: " << static_cast<int>(valuec) << std::endl;
             std::cout << "float: " << static_cast<float>(valuec) << ".0f" << std::endl;
             std::cout << "double: " << static_cast<double>(valuec) << ".0" << std::endl;
+        }
+        catch (const std::out_of_range& e)
+        {
+            std::cout << "Error: Integer is out of range" << std::endl;
         }
     }
 
