@@ -1,17 +1,8 @@
 #include "ScalarConverter.hpp"
 #include <cmath>
-#include <limits>
 
 void ScalarConverter::convert(std::string str)
 {
-    std::cout << "Max int: " << std::numeric_limits<int>::max() << std::endl;
-    std::cout << "Max float: " << std::numeric_limits<float>::max() << std::endl;
-    std::cout << "Max double: " << std::numeric_limits<double>::max() << std::endl;
-
-    std::cout << "Min int: " << std::numeric_limits<int>::min() << std::endl;
-    std::cout << "Min float: " << std::numeric_limits<float>::min() << std::endl;
-    std::cout << "Min double: " << std::numeric_limits<double>::min() << std::endl << std::endl;
-
     char    valuec = 0;
     int     valuei = 0;
     float   valuef = 0;
@@ -21,11 +12,6 @@ void ScalarConverter::convert(std::string str)
     bool    f = false;
     bool    d = false;
     bool    special = false;
-
-    // need to have a check for if string is a mixture of chars and ints, or all chars // MORE THAN ONE CHAR or ONE CHAR NOT AT END
-    // nan
-    // inf
-    // need to handle overflow (out of range exceptions)
     
     if (str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf")
     {
@@ -33,8 +19,31 @@ void ScalarConverter::convert(std::string str)
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
 
-        std::cout << "float: " << str << std::endl;  // need to sort out these two lines and do nan
-        std::cout << "double: " << str << std::endl;
+        if (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'f') 
+            std::cout << "float: " << str << std::endl;
+        else
+            std::cout << "float: " << str + "f" << std::endl;
+
+        if (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'f')
+            std::cout << "double: " << str.substr(0, str.length() - 1) << std::endl;
+        else
+            std::cout << "double: " << str << std::endl;
+    }
+    if (str == "nan" || str == "nanf")
+    {
+        special = true;
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+
+        if (str[str.length() - 1] == 'f') 
+            std::cout << "float: " << str << std::endl;
+        else
+            std::cout << "float: " << str + "f" << std::endl;
+
+        if (str[str.length() - 1] == 'f')
+            std::cout << "double: " << str.substr(0, str.length() - 1) << std::endl;
+        else
+            std::cout << "double: " << str << std::endl;
     }
 
 
@@ -47,12 +56,14 @@ void ScalarConverter::convert(std::string str)
             f = true;
             valuef = std::stof(str);
         }
-        else
+        else if (str.length() - 2 == '.' || std::isdigit(str.length() - 2))
         {
             std::cout << "literal type is double (if it doesn't contain chars)" << std::endl;
             d = true;
             valued = std::stod(str);
         }
+        else
+            std::cout << "Error: Invalid characters" << std::endl;
     }
     else
     {
@@ -61,6 +72,14 @@ void ScalarConverter::convert(std::string str)
             valuei = std::stoi(str);
             i = true;
             std::cout << "literal type is int" << std::endl;
+            for (char c : str) // if the string starts with a number but contains characters
+            {
+                if (!std::isdigit(c))
+                {
+                    std::cout << "Error: Cannot convert a string containing characters" << std::endl;
+                    exit(1);
+                }
+            }
         }
         catch (const std::invalid_argument& e) // CAST AND PRINT CHARS
         {
@@ -70,8 +89,8 @@ void ScalarConverter::convert(std::string str)
             else
             {
                 if (special == false)
-                    std::cout << "Error: Cannot convert a string of characters" << std::endl;
-                exit (1);
+                    std::cout << "Error: Cannot convert a string containing characters" << std::endl;
+                exit(1);
             }
             std::cout << "literal type is char" << std::endl;
             std::cout << "int: " << static_cast<int>(valuec) << std::endl;
