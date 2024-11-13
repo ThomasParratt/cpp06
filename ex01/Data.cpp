@@ -5,7 +5,12 @@ Data::Data()
 
 }
 
-Data::Data(std::string str)
+Data::Data(int value)
 {
-    //ScalarConverter::convert(str);
+    this->value = value;
+}
+
+int Data::getValue()
+{
+    return (this->value);
 }
