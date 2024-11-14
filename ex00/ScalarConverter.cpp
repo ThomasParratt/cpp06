@@ -65,7 +65,6 @@ void ScalarConverter::convert(std::string str)
             std::cout << "double: " << str << std::endl;
     }
 
-
     // GET TYPES
     if (str.find('.') != std::string::npos)
     {
@@ -100,9 +99,9 @@ void ScalarConverter::convert(std::string str)
     }
     else
     {
-        for (char c : str) // if the string starts with a number but contains characters
+        for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
         {
-            if (!std::isdigit(c))
+            if (!std::isdigit(c) && c != 'e')
             {
                 std::cout << "Error: Cannot convert a string containing characters" << std::endl;
                 exit(1);
