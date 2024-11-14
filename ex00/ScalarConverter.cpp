@@ -71,17 +71,31 @@ void ScalarConverter::convert(std::string str)
     {
         if (str.find('f') == str.length() - 1)
         {
-            std::cout << "literal type is float" << std::endl;
-            f = true;
-            valuef = std::stof(str);
+            try
+            {
+                valuef = std::stof(str);
+                std::cout << "literal type is float" << std::endl;
+                f = true;
+            }
+            catch (const std::out_of_range& e)
+            {
+                std::cout << "Error: Float is out of range" << std::endl;
+            }
         }
         else if (str[str.length() - 1] == '.' || std::isdigit(str[str.length() - 1]))
         {
-            std::cout << "literal type is double (if it doesn't contain chars)" << std::endl;
-            d = true;
-            valued = std::stod(str);
+            try
+            {
+                valued = std::stod(str);
+                std::cout << "literal type is double (if it doesn't contain chars)" << std::endl;
+                d = true;
+            }
+            catch (const std::out_of_range& e)
+            {
+                std::cout << "Error: Double is out of range" << std::endl;
+            }
         }
-        else
+        else 
         {
             std::cout << str[str.length() - 1] << std::endl;
             std::cout << "Error: Invalid characters" << std::endl;
@@ -89,19 +103,19 @@ void ScalarConverter::convert(std::string str)
     }
     else
     {
+        for (char c : str) // if the string starts with a number but contains characters
+        {
+            if (!std::isdigit(c))
+            {
+                std::cout << "Error: Cannot convert a string containing characters" << std::endl;
+                exit(1);
+            }
+        }
         try
         {
             valuei = std::stoi(str);
             i = true;
             std::cout << "literal type is int" << std::endl;
-            for (char c : str) // if the string starts with a number but contains characters
-            {
-                if (!std::isdigit(c))
-                {
-                    std::cout << "Error: Cannot convert a string containing characters" << std::endl;
-                    exit(1);
-                }
-            }
         }
         catch (const std::invalid_argument& e) // CAST AND PRINT CHARS
         {
