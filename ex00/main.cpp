@@ -8,5 +8,5 @@ int main(int argc, char **argv)
         ScalarConverter::convert(arg);
     }
     else
-        std::cout << "Incorrect number of arguments" << std::endl;
+        std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
