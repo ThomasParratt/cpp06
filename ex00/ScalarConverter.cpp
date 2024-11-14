@@ -96,10 +96,7 @@ void ScalarConverter::convert(std::string str)
             }
         }
         else 
-        {
-            std::cout << str[str.length() - 1] << std::endl;
             std::cout << "Error: Invalid characters" << std::endl;
-        }
     }
     else
     {
