@@ -10,3 +10,6 @@ int main(int argc, char **argv)
     else
         std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
+
+// int overflow when typecast to int?
+// minus with e
