@@ -7,11 +7,11 @@ class ScalarConverter
 {
     private:
         ScalarConverter();
-        // ScalarConverter();
-        // ScalarConverter(const ScalarConverter& obj);
-        // ~ScalarConverter();
-        // ScalarConverter&  operator=(const ScalarConverter& obj);
+        ScalarConverter(const ScalarConverter& obj);
     public:
+        ScalarConverter& operator=(const ScalarConverter& obj);
+		~ScalarConverter();
+
         static void convert(std::string str);
 };
 
