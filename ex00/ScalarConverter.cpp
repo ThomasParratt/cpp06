@@ -65,8 +65,17 @@ void ScalarConverter::convert(std::string str)
             std::cout << "double: " << str << std::endl;
     }
 
+    for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
+        {
+            if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f') // this condition has been changed
+            {
+                std::cout << "Error: Cannot convert a string containing characters(1)" << std::endl;
+                exit(1);
+            }
+        }
+
     // GET TYPES
-    if (str.find('.') != std::string::npos)
+    if (str.find('.') != std::string::npos || str.find('e') != std::string::npos) // this condition has been changed
     {
         if (str.find('f') == str.length() - 1)
         {
@@ -99,14 +108,14 @@ void ScalarConverter::convert(std::string str)
     }
     else
     {
-        for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
-        {
-            if (!std::isdigit(c) && c != 'e')
-            {
-                std::cout << "Error: Cannot convert a string containing characters" << std::endl;
-                exit(1);
-            }
-        }
+        // for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
+        // {
+        //     if (!std::isdigit(c) && c != 'e')
+        //     {
+        //         std::cout << "Error: Cannot convert a string containing characters" << std::endl;
+        //         exit(1);
+        //     }
+        // }
         try
         {
             valuei = std::stoi(str);
@@ -121,7 +130,7 @@ void ScalarConverter::convert(std::string str)
             else
             {
                 if (special == false)
-                    std::cout << "Error: Cannot convert a string containing characters" << std::endl;
+                    std::cout << "Error: Cannot convert a string containing characters(2)" << std::endl;
                 exit(1);
             }
             std::cout << "literal type is char" << std::endl;
@@ -153,11 +162,11 @@ void ScalarConverter::convert(std::string str)
         else
             std::cout << "char: Non displayable" << std::endl;
         std::cout << "int: " << static_cast<int>(valuef) << std::endl;
-        if (valuef == std::floor(valuef))
+        if (valuef == std::floor(valuef) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "float: " << valuef << ".0f" << std::endl;
         else
             std::cout << "float: " << valuef << "f" << std::endl;
-        if (valuef == std::floor(valuef))
+        if (valuef == std::floor(valuef) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "double: " << static_cast<double>(valuef) << ".0" << std::endl;
         else
             std::cout << "double: " << static_cast<double>(valuef) << std::endl;
@@ -169,11 +178,11 @@ void ScalarConverter::convert(std::string str)
         else
             std::cout << "char: Non displayable" << std::endl;
         std::cout << "int: " << static_cast<int>(valued) << std::endl;
-        if (valued == std::floor(valued))
+        if (valued == std::floor(valued) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "float: " << static_cast<float>(valued) << ".0f" << std::endl;
         else
             std::cout << "float: " << static_cast<float>(valued) << "f" << std::endl;
-        if (valued == std::floor(valued))
+        if (valued == std::floor(valued) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "double: " << valued << ".0" << std::endl;
         else
             std::cout << "double: " << valued << std::endl;
