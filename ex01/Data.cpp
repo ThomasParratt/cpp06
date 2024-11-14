@@ -5,12 +5,12 @@ Data::Data()
 
 }
 
-Data::Data(int value)
+Data::Data(int *value)
 {
     this->value = value;
 }
 
-int Data::getValue()
+int *Data::getValue()
 {
     return (this->value);
 }

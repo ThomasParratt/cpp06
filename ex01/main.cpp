@@ -2,8 +2,15 @@
 
 int main(void)
 {
-    Data    *data = new Data(42);
+    int num = 42;
+    int *ptr_to_num = &num;
 
-    uintptr_t ptr_as_int = Serializer::serialize(data);
-    std::cout << ptr_as_int << std::endl;
+    std::cout << ptr_to_num << std::endl;
+
+    Data    *data = new Data(ptr_to_num);
+
+    uintptr_t ptr_value = Serializer::serialize(data);
+
+    std::cout << ptr_value << std::endl;
+    std::cout << std::showbase << std::hex << ptr_value << std::endl;
 }
