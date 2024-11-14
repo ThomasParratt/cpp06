@@ -4,12 +4,12 @@
 # include <iostream>
 # include "Base.hpp"
 
-class A : Base
+class A : public Base
 {
     private:
         
     public:
-
+        
 };
 
 #endif

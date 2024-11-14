@@ -1,6 +1,6 @@
 NAME		=	identify
 
-SRC			=	Serializer.cpp Data.cpp main.cpp
+SRC			=	main.cpp
 
 CC			=	c++
 
