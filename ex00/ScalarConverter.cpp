@@ -56,13 +56,13 @@ void ScalarConverter::convert(std::string str)
             f = true;
             valuef = std::stof(str);
         }
-        else if (str.length() - 1 == '.' || std::isdigit(str.length() - 1))
+        else if (str[str.length() - 1] == '.' || std::isdigit(str[str.length() - 1]))
         {
             std::cout << "literal type is double (if it doesn't contain chars)" << std::endl;
             d = true;
             valued = std::stod(str);
         }
-        else  // all doubles seem to go here // why??
+        else
         {
             std::cout << str[str.length() - 1] << std::endl;
             std::cout << "Error: Invalid characters" << std::endl;
