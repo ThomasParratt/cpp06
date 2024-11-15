@@ -2,19 +2,18 @@
 
 int main(void)
 {
-    int num = 42;
-    int *ptr_to_num = &num;
+    Data    *dataPtr = new Data();
 
-    std::cout << ptr_to_num << std::endl;
+    std::cout << "dataPtr = " << dataPtr << std::endl;
 
-    Data    *data = new Data(ptr_to_num);
+    uintptr_t ptrValue = Serializer::serialize(dataPtr);
 
-    uintptr_t ptr_value = Serializer::serialize(data);
+    // std::cout << "ptr_value in decimal = " << ptrValue << std::endl;
+    // std::cout << std::showbase << std::hex << "ptr_value in hexadecimal = " << ptrValue << std::endl;
 
-    std::cout << ptr_value << std::endl;
-    std::cout << std::showbase << std::hex << ptr_value << std::endl;
+    Data    *newDataPtr = Serializer::deserialize(ptrValue);
 
-    Data    *data_new = Serializer::deserialize(ptr_value);
+    std::cout << "newDataPtr = " << newDataPtr << std::endl;
 
-    std::cout << data_new << std::endl;
+    delete dataPtr;
 }
