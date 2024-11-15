@@ -11,5 +11,4 @@ int main(int argc, char **argv)
         std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
 
-// minus with e
 // float overflow when typecast to float from double? Or does this just display inff?

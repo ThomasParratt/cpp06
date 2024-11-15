@@ -68,7 +68,7 @@ void ScalarConverter::convert(std::string str)
     {
         for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
             {
-                if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f') // this condition has been changed
+                if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f' && str[0] != '-') // this condition has been changed
                 {
                     std::cout << "Error: Cannot convert a string containing characters(1)" << std::endl;
                     exit(1);
