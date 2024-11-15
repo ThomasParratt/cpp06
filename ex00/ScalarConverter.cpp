@@ -1,5 +1,4 @@
 #include "ScalarConverter.hpp"
-#include <cmath>
 
 ScalarConverter::ScalarConverter()
 {
@@ -111,14 +110,6 @@ void ScalarConverter::convert(std::string str)
     }
     else
     {
-        // for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
-        // {
-        //     if (!std::isdigit(c) && c != 'e')
-        //     {
-        //         std::cout << "Error: Cannot convert a string containing characters" << std::endl;
-        //         exit(1);
-        //     }
-        // }
         try
         {
             valuei = std::stoi(str);

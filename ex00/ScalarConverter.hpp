@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <limits>
+# include <cmath>
 
 class ScalarConverter
 {

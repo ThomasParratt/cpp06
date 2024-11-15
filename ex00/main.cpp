@@ -11,7 +11,5 @@ int main(int argc, char **argv)
         std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
 
-// int overflow when typecast to int?
 // minus with e
-// If a conversion does not make any sense or overflows, display a message to inform
-// the user that the type conversion is impossible.
+// float overflow when typecast to float from double? Or does this just display inff?
