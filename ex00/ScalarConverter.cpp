@@ -64,7 +64,7 @@ void ScalarConverter::convert(std::string str)
             std::cout << "double: " << str << std::endl;
     }
 
-    if (special == false)
+    if (special == false && str.length() != 1)
     {
         for (char c : str)
             {
@@ -121,7 +121,7 @@ void ScalarConverter::convert(std::string str)
             valuec = str[0];
             if (str.length() == 1)
                 std::cout << "char: '" << valuec << "'" << std::endl;
-            else // is this correct? needed?
+            else
             {
                 if (special == false)
                     std::cout << "Error: Cannot convert a string containing characters(2)" << std::endl;
