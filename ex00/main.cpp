@@ -10,5 +10,3 @@ int main(int argc, char **argv)
     else
         std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
-
-// float overflow when typecast to float from double? Or does this just display inff?

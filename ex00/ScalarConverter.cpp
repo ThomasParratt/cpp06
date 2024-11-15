@@ -37,7 +37,7 @@ void ScalarConverter::convert(std::string str)
         std::cout << "char: impossible" << std::endl;
         std::cout << "int: impossible" << std::endl;
 
-        if (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'f') 
+        if (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'f')
             std::cout << "float: " << str << std::endl;
         else
             std::cout << "float: " << str + "f" << std::endl;
@@ -97,7 +97,7 @@ void ScalarConverter::convert(std::string str)
             try
             {
                 valued = std::stod(str);
-                std::cout << "literal type is double (if it doesn't contain chars)" << std::endl;
+                std::cout << "literal type is double" << std::endl;
                 d = true;
             }
             catch (const std::out_of_range& e)
