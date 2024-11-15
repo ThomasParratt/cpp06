@@ -10,3 +10,5 @@ int main(int argc, char **argv)
     else
         std::cout << "Usage: ./convert <string to convert>" << std::endl;
 }
+
+// not working if I have a char as an arg
