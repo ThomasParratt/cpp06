@@ -13,3 +13,5 @@ int main(int argc, char **argv)
 
 // int overflow when typecast to int?
 // minus with e
+// If a conversion does not make any sense or overflows, display a message to inform
+// the user that the type conversion is impossible.

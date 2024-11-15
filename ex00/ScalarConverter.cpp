@@ -65,14 +65,17 @@ void ScalarConverter::convert(std::string str)
             std::cout << "double: " << str << std::endl;
     }
 
-    for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
-        {
-            if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f') // this condition has been changed
+    if (special == false)
+    {
+        for (char c : str) // if the string starts with a number but contains characters  // I think this needs to go before all conversions?
             {
-                std::cout << "Error: Cannot convert a string containing characters(1)" << std::endl;
-                exit(1);
+                if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f') // this condition has been changed
+                {
+                    std::cout << "Error: Cannot convert a string containing characters(1)" << std::endl;
+                    exit(1);
+                }
             }
-        }
+    }
 
     // GET TYPES
     if (str.find('.') != std::string::npos || str.find('e') != std::string::npos) // this condition has been changed
@@ -161,7 +164,14 @@ void ScalarConverter::convert(std::string str)
             std::cout << "char: '" << static_cast<char>(valuef) << "'" << std::endl;
         else
             std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << static_cast<int>(valuef) << std::endl;
+
+
+        if (valuef > static_cast<float>(std::numeric_limits<int>::max()) || valuef < static_cast<float>(std::numeric_limits<int>::min()))
+            std::cout << "int: impossible" << std::endl;
+        else
+            std::cout << "int: " << static_cast<int>(valuef) << std::endl;
+
+
         if (valuef == std::floor(valuef) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "float: " << valuef << ".0f" << std::endl;
         else
@@ -177,7 +187,14 @@ void ScalarConverter::convert(std::string str)
             std::cout << "char: '" << static_cast<char>(valued) << "'" << std::endl;
         else
             std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << static_cast<int>(valued) << std::endl;
+        
+        
+        if (valued > std::numeric_limits<int>::max() || valued < std::numeric_limits<int>::min())
+            std::cout << "int: impossible" << std::endl;
+        else
+            std::cout << "int: " << static_cast<int>(valued) << std::endl;
+
+
         if (valued == std::floor(valued) && str.find('e') == std::string::npos) // this has been changed
             std::cout << "float: " << static_cast<float>(valued) << ".0f" << std::endl;
         else
