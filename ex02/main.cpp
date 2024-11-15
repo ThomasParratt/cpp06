@@ -6,11 +6,11 @@
 void identify(Base* p)
 {
     std::cout << "Identify pointer: ";
-    if (dynamic_cast<A*>(p))
+    if (dynamic_cast<A*>(p)) // returns a nullptr on failure
         std::cout << "A type" << std::endl;
-    if (dynamic_cast<B*>(p))
+    else if (dynamic_cast<B*>(p))
         std::cout << "B type" << std::endl;
-    if (dynamic_cast<C*>(p))
+    else if (dynamic_cast<C*>(p))
         std::cout << "C type" << std::endl;
 }
 
@@ -19,7 +19,7 @@ void identify(Base& p)
     std::cout << "Identify reference: ";
     try
     {
-        A& a_ref = dynamic_cast<A&>(p); // returns an exception instead of returning a nullptr
+        A& a_ref = dynamic_cast<A&>(p); // throws an exception on failure
         std::cout << "A type" << std::endl;
         (void)a_ref;
     }
@@ -38,7 +38,6 @@ void identify(Base& p)
         (void)c_ref;
     }
     catch (const std::bad_cast& e){}
-
 }
 
 Base * generate(void)
@@ -71,4 +70,6 @@ int main(void)
     
     identify(ptr);
     identify(ref);
+
+    delete ptr;
 }
