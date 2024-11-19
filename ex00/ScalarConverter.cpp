@@ -70,7 +70,7 @@ void ScalarConverter::convert(std::string str)
             {
                 if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f' && str[0] != '-')
                 {
-                    std::cout << "Error 1: Cannot convert" << std::endl;
+                    std::cout << "Error 1: Invalid input string" << std::endl;
                     exit(1);
                 }
             }
@@ -113,8 +113,8 @@ void ScalarConverter::convert(std::string str)
         try
         {
             valueI = std::stoi(str);
-            i = true;
             std::cout << "literal type is int" << std::endl;
+            i = true;
         }
         catch (const std::invalid_argument& e) // CAST AND PRINT CHARS
         {
@@ -124,7 +124,7 @@ void ScalarConverter::convert(std::string str)
             else
             {
                 if (special == false)
-                    std::cout << "Error 2: Cannot convert" << std::endl;
+                    std::cout << "Error 2: Invalid input string" << std::endl;
                 exit(1);
             }
             std::cout << "literal type is char" << std::endl;
