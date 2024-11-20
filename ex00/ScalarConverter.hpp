@@ -4,6 +4,7 @@
 # include <iostream>
 # include <limits>
 # include <cmath>
+# include <regex>
 
 class ScalarConverter
 {
