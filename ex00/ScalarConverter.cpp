@@ -84,6 +84,10 @@ int    valid(std::string str)
             }
         }
     }
+    // if (str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
+    //     return (1);
+    // else    
+    //     return (0);
     return (1);
 }
 
