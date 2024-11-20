@@ -10,22 +10,6 @@ class ScalarConverter
     private:
         ScalarConverter();
         ScalarConverter(const ScalarConverter& obj);
-
-        // bool    identifyInf();
-        // bool    identifyNan();
-        // bool    identifyC();
-        // bool    identifyI();
-        // bool    identifyF();
-        // bool    identifyD();
-
-        // void    validate(std::string str);
-
-        // void    printInf();
-        // void    printNan();
-        // void    printC();
-        // void    printI();
-        // void    printF();
-        // void    printD();
     public:
         ScalarConverter& operator=(const ScalarConverter& obj);
 		~ScalarConverter();
@@ -33,6 +17,6 @@ class ScalarConverter
         static void convert(std::string str);
 };
 
-
+int    valid(std::string str);
 
 #endif
