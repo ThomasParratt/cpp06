@@ -36,7 +36,7 @@ int    valid(std::string str)
                 char c = str[i];
                 if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f' && c != '-')
                     return (0);
-                else if (c == 'e') // can't be at beginning or end or before f
+                else if (c == 'e') // can't be at beginning or end or immediately before f
                 {
                     e_count++;
                     if (e_count > 1 || str[0] == 'e' || str[str.length() - 1] == 'e' || (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'e'))
@@ -54,7 +54,7 @@ int    valid(std::string str)
                     if (f_count > 2 || i < str.length() - 1)
                         return (0);
                 }
-                else if (c == '.') // point can't be at beginning. Can be at end if after number
+                else if (c == '.') // point can be at end if after number
                 {
                     point_count++;
                     if (point_count > 1 || (i == str.length() - 1 && !std::isdigit(str[i - 1])))
