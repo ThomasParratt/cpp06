@@ -21,10 +21,8 @@ ScalarConverter::~ScalarConverter()
 
 int    valid(std::string str)
 {
-    int minus_count = 0;
-    int f_count = 0;
-    int point_count = 0;
-    size_t i = 0;
+    int     point_count = 0;
+    size_t  i = 0;
 
     if (str != "-inff" && str != "+inff" && str != "+inf" && str != "-inf" && str != "nan" && str != "nanf")
     {
@@ -35,34 +33,19 @@ int    valid(std::string str)
                 char c = str[i];
                 if (!std::isdigit(c) && c != '.' && c != 'f' && c != '-')
                     return (0);
-                else if (c == '-') // must be at beginning unless immediately after e
-                {
-                    minus_count++;
-                    if (minus_count > 1 || (i > 0 && str[i - 1] != 'e'))
-                        return (0);
-                }
-                else if (c == 'f') // f can only be in the last character of the string
-                {
-                    f_count++;
-                    if (f_count > 2 || i < str.length() - 1)
-                        return (0);
-                }
-                else if (c == '.') // point can be at end if after number
+                else if (c == '-' && i > 0) // must be at beginning and only one
+                    return (0);
+                else if (c == 'f' && i < str.length() - 1) // f can only be in the last character of the string
+                    return (0);
+                else if (c == '.') // point can be at end if after number, can't be at beginning
                 {
                     point_count++;
-                    if (point_count > 1 || (i == str.length() - 1 && !std::isdigit(str[i - 1])))
+                    if (point_count > 1 || (i == str.length() - 1 && !std::isdigit(str[i - 1])) || i == 0)
                         return (0);
                 } 
                 i++;
             }
         }
-        if (str.find('f') != std::string::npos && str.find('.') == std::string::npos) // contains f and no point
-            return (0);
-        // if (str.find('.') != std::string::npos && str.find('e') != std::string::npos) // contains a point and an e
-        // {
-        //     if (str.find('.') > str.find('e')) // point can be before e
-        //         return (0);
-        // }
     }
     return (1);
 }
