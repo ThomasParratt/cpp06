@@ -8,15 +8,18 @@ RM			=	rm -f
 
 CFLAGS		=	-Wall -Wextra -Werror
 
-$(NAME):	$(SRC)
-			$(CC) $(CFLAGS) -o $(NAME) $(SRC)
+OBJ			=	$(SRC:.cpp=.o)
+
+$(NAME):	$(OBJ)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 all:		$(NAME)
 
 clean:
-			${RM} $(NAME)
+			${RM} $(OBJ)
 
 fclean: 	clean
+			${RM} $(NAME)
 
 re:			fclean all
 
