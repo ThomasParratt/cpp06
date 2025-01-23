@@ -21,7 +21,6 @@ ScalarConverter::~ScalarConverter()
 
 int    valid(std::string str)
 {
-    int e_count = 0;
     int minus_count = 0;
     int f_count = 0;
     int point_count = 0;
@@ -34,14 +33,8 @@ int    valid(std::string str)
             while (str[i])
             {
                 char c = str[i];
-                if (!std::isdigit(c) && c != 'e' && c != '.' && c != 'f' && c != '-')
+                if (!std::isdigit(c) && c != '.' && c != 'f' && c != '-')
                     return (0);
-                else if (c == 'e') // can't be at beginning or end or immediately before f
-                {
-                    e_count++;
-                    if (e_count > 1 || str[0] == 'e' || str[str.length() - 1] == 'e' || (str[str.length() - 1] == 'f' && str[str.length() - 2] == 'e'))
-                        return  (0);
-                }
                 else if (c == '-') // must be at beginning unless immediately after e
                 {
                     minus_count++;
@@ -63,18 +56,16 @@ int    valid(std::string str)
                 i++;
             }
         }
-        if (str.find('f') != std::string::npos && str.find('.') == std::string::npos && str.find('e') == std::string::npos) // contains f and no point and no e
+        if (str.find('f') != std::string::npos && str.find('.') == std::string::npos) // contains f and no point
             return (0);
-        if (str.find('.') != std::string::npos && str.find('e') != std::string::npos) // contains a point and an e
-        {
-            if (str.find('.') > str.find('e')) // point can be before e
-                return (0);
-        }
+        // if (str.find('.') != std::string::npos && str.find('e') != std::string::npos) // contains a point and an e
+        // {
+        //     if (str.find('.') > str.find('e')) // point can be before e
+        //         return (0);
+        // }
     }
     return (1);
 }
-
-
 
 void ScalarConverter::convert(std::string str)
 {
@@ -95,8 +86,7 @@ void ScalarConverter::convert(std::string str)
     }
 
     // GET TYPES
-    if (str.find('.') != std::string::npos || str.find('e') != std::string::npos 
-        || str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
+    if (str.find('.') != std::string::npos || str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
     {
         if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf")
         {
@@ -181,11 +171,11 @@ void ScalarConverter::convert(std::string str)
             std::cout << "int: " << static_cast<int>(valueF) << std::endl;
 
 
-        if ((valueF == std::floor(valueF) && str.find('e') != std::string::npos) && !special)
+        if ((valueF == std::floor(valueF)) && !special)
             std::cout << "float: " << valueF << ".0f" << std::endl;
         else
             std::cout << "float: " << valueF << "f" << std::endl;
-        if ((valueF == std::floor(valueF) && str.find('e') != std::string::npos) && !special)
+        if ((valueF == std::floor(valueF)) && !special)
             std::cout << "double: " << static_cast<double>(valueF) << ".0" << std::endl;
         else
             std::cout << "double: " << static_cast<double>(valueF) << std::endl;
@@ -206,11 +196,11 @@ void ScalarConverter::convert(std::string str)
             std::cout << "int: " << static_cast<int>(valueD) << std::endl;
 
 
-        if ((valueD == std::floor(valueD) && str.find('e') != std::string::npos) && !special)
+        if ((valueD == std::floor(valueD)) && !special)
             std::cout << "float: " << static_cast<float>(valueD) << ".0f" << std::endl;
         else
             std::cout << "float: " << static_cast<float>(valueD) << "f" << std::endl;
-        if ((valueD == std::floor(valueD) && str.find('e') != std::string::npos) && !special)
+        if ((valueD == std::floor(valueD)) && !special)
             std::cout << "double: " << valueD << ".0" << std::endl;
         else
             std::cout << "double: " << valueD << std::endl;
