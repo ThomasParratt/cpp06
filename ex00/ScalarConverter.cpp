@@ -19,7 +19,7 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-int    valid(std::string str)
+static int    valid(std::string str)
 {
     int     point_count = 0;
     size_t  i = 0;

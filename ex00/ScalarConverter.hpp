@@ -1,5 +1,4 @@
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#pragma once
 
 # include <iostream>
 # include <limits>
@@ -16,7 +15,3 @@ class ScalarConverter
 
         static void convert(std::string str);
 };
-
-int    valid(std::string str);
-
-#endif
