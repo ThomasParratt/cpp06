@@ -190,13 +190,16 @@ void ScalarConverter::convert(std::string str)
 
 
         if ((valueF == std::floor(valueF)) && !special)
+        {
             std::cout << "float: " << valueF << ".0f" << std::endl;
-        else
-            std::cout << "float: " << valueF << "f" << std::endl;
-        if ((valueF == std::floor(valueF)) && !special)
             std::cout << "double: " << static_cast<double>(valueF) << ".0" << std::endl;
+        }
         else
+        {
+            std::cout << "float: " << valueF << "f" << std::endl;
             std::cout << "double: " << static_cast<double>(valueF) << std::endl;
+        }
+            
     }
     if (d)
     {
@@ -215,12 +218,14 @@ void ScalarConverter::convert(std::string str)
 
 
         if ((valueD == std::floor(valueD)) && !special)
+        {
             std::cout << "float: " << static_cast<float>(valueD) << ".0f" << std::endl;
-        else
-            std::cout << "float: " << static_cast<float>(valueD) << "f" << std::endl;
-        if ((valueD == std::floor(valueD)) && !special)
             std::cout << "double: " << valueD << ".0" << std::endl;
+        }
         else
-            std::cout << "double: " << valueD << std::endl;
+        {
+            std::cout << "float: " << static_cast<float>(valueD) << "f" << std::endl;
+            std::cout << "double: " << valueD << std::endl; 
+        }  
     }
 }
