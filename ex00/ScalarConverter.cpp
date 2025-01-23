@@ -69,9 +69,18 @@ void ScalarConverter::convert(std::string str)
     }
 
     // GET TYPES
-    if (str.find('.') != std::string::npos || str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
+    if (str == "f")
     {
-        if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf")
+        valueC = str[0];
+        std::cout << "literal type is char" << std::endl;
+        std::cout << "char: '" << valueC << "'" << std::endl;
+        std::cout << "int: " << static_cast<int>(valueC) << std::endl;
+        std::cout << "float: " << static_cast<float>(valueC) << ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(valueC) << ".0" << std::endl;
+    }
+    else if (str.find('.') != std::string::npos || str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
+    {
+        if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf") // Handle floats
         {
             if (str == "+inff" || str == "-inff" || str == "nanf")
                 special = true;
@@ -86,7 +95,7 @@ void ScalarConverter::convert(std::string str)
                 std::cout << "Error: Float is out of range" << std::endl;
             }
         }
-        else if (str[str.length() - 1] == '.' || std::isdigit(str[str.length() - 1]) || str == "+inf" || str == "-inf" || str == "nan")
+        else // Handle doubles
         {
             if (str == "+inf" || str == "-inf" || str == "nan")
                 special = true;
@@ -102,7 +111,20 @@ void ScalarConverter::convert(std::string str)
             }
         }
     }
-    else
+    else if (str[str.length() - 1] == 'f') // No decimal point, but ends with 'f'
+    {
+        try
+        {
+            valueF = std::stof(str);
+            std::cout << "literal type is float" << std::endl;
+            f = true;
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "Error: Invalid float format" << std::endl;
+        }
+    }
+    else // No decimal point. Possible integer, double or char
     {
         try
         {
@@ -110,12 +132,14 @@ void ScalarConverter::convert(std::string str)
             std::cout << "literal type is int" << std::endl;
             i = true;
         }
-        catch (const std::invalid_argument& e) // CAST AND PRINT CHARS
+        catch (const std::invalid_argument& e)
         {
             valueC = str[0];
             if (str.length() == 1)
+            {
+                std::cout << "literal type is char" << std::endl;
                 std::cout << "char: '" << valueC << "'" << std::endl;
-            std::cout << "literal type is char" << std::endl;
+            }
             std::cout << "int: " << static_cast<int>(valueC) << std::endl;
             std::cout << "float: " << static_cast<float>(valueC) << ".0f" << std::endl;
             std::cout << "double: " << static_cast<double>(valueC) << ".0" << std::endl;
@@ -123,8 +147,19 @@ void ScalarConverter::convert(std::string str)
         catch (const std::out_of_range& e)
         {
             std::cout << "Error: Integer is out of range" << std::endl;
+            try
+            {
+                valueD = std::stod(str);
+                std::cout << "literal type is double" << std::endl;
+                d = true;
+            }
+            catch (const std::out_of_range& e)
+            {
+                std::cout << "Error: Double is out of range" << std::endl;
+            }
         }
     }
+
 
     // CAST AND PRINT INTS, FLOATS AND DOUBLES
     if (i)
@@ -141,7 +176,7 @@ void ScalarConverter::convert(std::string str)
     }
     if (f)
     {
-        if (valueF == std::floor(valueF) && valueF >= 32 && valueF <= 126)
+        if (valueF == std::floor(valueF) && valueF >= 32 && valueF <= 126) 
             std::cout << "char: '" << static_cast<char>(valueF) << "'" << std::endl;
         else if (valueF == std::floor(valueF) && valueF >= 0 && valueF <= 255)
             std::cout << "char: Non displayable" << std::endl;
