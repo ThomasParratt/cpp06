@@ -1,5 +1,4 @@
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#pragma once
 
 # include <iostream>
 # include <cstdint>
@@ -17,5 +16,3 @@ class Serializer
         static uintptr_t    serialize(Data* ptr);
         static Data*        deserialize(uintptr_t raw);
 };
-
-#endif
