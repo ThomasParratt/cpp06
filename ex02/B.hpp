@@ -5,8 +5,5 @@
 
 class B : public Base
 {
-    private:
-        
-    public:
-
+    
 };
