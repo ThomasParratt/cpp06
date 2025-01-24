@@ -1,14 +1,8 @@
-#ifndef DATA_HPP
-# define DATA_HPP
+#pragma once
 
 # include <iostream>
 
-class Data
+struct Data
 {
-    private:
-
-    public:
-        Data();
+    std::string myData = "Hello world";
 };
-
-#endif
