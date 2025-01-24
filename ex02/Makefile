@@ -1,6 +1,6 @@
 NAME		=	identify
 
-SRC			=	main.cpp
+SRC			=	main.cpp Base.cpp
 
 CC			=	c++
 
