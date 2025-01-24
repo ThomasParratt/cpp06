@@ -1,5 +1,4 @@
-#ifndef BASE_HPP
-# define BASE_HPP
+#pragma once
 
 # include <iostream>
 
@@ -8,7 +7,5 @@ class Base
     private:
         
     public:
-        virtual ~Base() {};
+        virtual ~Base();
 };
-
-#endif
