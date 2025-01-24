@@ -1,5 +1,4 @@
-#ifndef C_HPP
-# define C_HPP
+#pragma once
 
 # include <iostream>
 # include "Base.hpp"
@@ -11,5 +10,3 @@ class C : public Base
     public:
 
 };
-
-#endif
