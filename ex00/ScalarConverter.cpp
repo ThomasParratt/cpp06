@@ -33,9 +33,9 @@ static int    valid(std::string str)
                 char c = str[i];
                 if (!std::isdigit(c) && c != '.' && c != 'f' && c != '-')
                     return (0);
-                else if (c == '-' && i > 0) // must be at beginning and only one
+                else if (c == '-' && i > 0) // must be at beginning
                     return (0);
-                else if (c == 'f' && i < str.length() - 1) // f can only be in the last character of the string
+                else if (c == 'f' && i < str.length() - 1) // f must be at the end
                     return (0);
                 else if (c == '.') // point can be at end if after number, can't be at beginning
                 {
@@ -78,7 +78,8 @@ void ScalarConverter::convert(std::string str)
         std::cout << "float: " << static_cast<float>(valueC) << ".0f" << std::endl;
         std::cout << "double: " << static_cast<double>(valueC) << ".0" << std::endl;
     }
-    else if (str.find('.') != std::string::npos || str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
+    else if (str.find('.') != std::string::npos || 
+        str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
     {
         if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf") // Handle floats
         {
