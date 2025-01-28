@@ -57,14 +57,23 @@ void ScalarConverter::convert(std::string str)
     }
 
     // GET TYPES
-    if (str == "f")
+    if (str.length() == 1)
     {
-        valueC = str[0];
-        std::cout << "literal type is char" << std::endl;
-        std::cout << "char: '" << valueC << "'" << std::endl;
-        std::cout << "int: " << static_cast<int>(valueC) << std::endl;
-        std::cout << "float: " << static_cast<float>(valueC) << "f" << std::endl;
-        std::cout << "double: " << static_cast<double>(valueC) << std::endl;
+        try
+        {
+            valueI = std::stoi(str);
+            std::cout << "literal type is int" << std::endl;
+            i = true;
+        }
+        catch (const std::invalid_argument& e)
+        {
+            valueC = str[0];
+            std::cout << "literal type is char" << std::endl;
+            std::cout << "char: '" << valueC << "'" << std::endl;
+            std::cout << "int: " << static_cast<int>(valueC) << std::endl;
+            std::cout << "float: " << static_cast<float>(valueC) << "f" << std::endl;
+            std::cout << "double: " << static_cast<double>(valueC) << std::endl;
+        }
     }
     else if (str.find('.') != std::string::npos || 
         str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
@@ -116,18 +125,6 @@ void ScalarConverter::convert(std::string str)
             valueI = std::stoi(str);
             std::cout << "literal type is int" << std::endl;
             i = true;
-        }
-        catch (const std::invalid_argument& e)
-        {
-            valueC = str[0];
-            if (str.length() == 1)
-            {
-                std::cout << "literal type is char" << std::endl;
-                std::cout << "char: '" << valueC << "'" << std::endl;
-            }
-            std::cout << "int: " << static_cast<int>(valueC) << std::endl;
-            std::cout << "float: " << static_cast<float>(valueC) << "f" << std::endl;
-            std::cout << "double: " << static_cast<double>(valueC) << std::endl;
         }
         catch (const std::out_of_range& e)
         {
