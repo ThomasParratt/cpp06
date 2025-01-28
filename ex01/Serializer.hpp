@@ -8,10 +8,10 @@ class Serializer
 {
     private:
         Serializer();
-        Serializer(const Serializer& obj);
-    public:
-        Serializer& operator=(const Serializer& obj);
+        Serializer(const Serializer& obj) = delete;
+        Serializer& operator=(const Serializer& obj) = delete;
 		~Serializer();
+    public:
 
         static uintptr_t    serialize(Data* ptr);
         static Data*        deserialize(uintptr_t raw);
