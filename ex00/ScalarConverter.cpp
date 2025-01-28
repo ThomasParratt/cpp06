@@ -106,7 +106,7 @@ void ScalarConverter::convert(std::string str)
         }
         catch (const std::exception& e)
         {
-            std::cout << "Error: Invalid float" << std::endl;
+            std::cout << "Error: Invalid float input" << std::endl;
         }
     }
     else // No decimal point. Possible integer, double or char
