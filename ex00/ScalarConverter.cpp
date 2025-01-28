@@ -8,6 +8,8 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
+// -.f
+//
 static int    valid(std::string str)
 {
     int     point_count = 0;
@@ -26,10 +28,10 @@ static int    valid(std::string str)
                     return (0);
                 else if (c == 'f' && i < str.length() - 1) // f must be at the end
                     return (0);
-                else if (c == '.') // point can be at end if after number, can't be at beginning
+                else if (c == '.') // point can be at end if after number
                 {
                     point_count++;
-                    if (point_count > 1 || (i == str.length() - 1 && !std::isdigit(str[i - 1])) || i == 0)
+                    if (point_count > 1 || (i == str.length() - 1 && !std::isdigit(str[i - 1])) || (i == str.length() - 2 && !std::isdigit(str[i - 1]))  && i != 0)
                         return (0);
                 } 
                 i++;
