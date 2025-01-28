@@ -161,9 +161,9 @@ void ScalarConverter::convert(std::string str)
     }
     if (f)
     {
-        if (valueF == std::floor(valueF) && valueF >= 32 && valueF <= 126) 
+        if (valueF >= 32 && valueF <= 126) 
             std::cout << "char: '" << static_cast<char>(valueF) << "'" << std::endl;
-        else if (valueF == std::floor(valueF) && valueF >= 0 && valueF <= 255)
+        else if (valueF >= 0 && valueF <= 255)
             std::cout << "char: Non displayable" << std::endl;
         else
             std::cout << "char: impossible" << std::endl;
@@ -178,9 +178,9 @@ void ScalarConverter::convert(std::string str)
     }
     if (d)
     {
-        if (valueD == std::floor(valueD) && valueD >= 32 && valueD <= 126)
+        if (valueD >= 32 && valueD <= 126)
             std::cout << "char: '" << static_cast<char>(valueD) << "'" << std::endl;
-        else if (valueD == std::floor(valueF) && valueD >= 0 && valueD <= 255)
+        else if (valueD >= 0 && valueD <= 255)
             std::cout << "char: Non displayable" << std::endl;
         else
             std::cout << "char: impossible" << std::endl;
