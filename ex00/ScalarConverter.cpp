@@ -69,7 +69,7 @@ void ScalarConverter::convert(std::string str)
     else if (str.find('.') != std::string::npos || 
         str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
     {
-        if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf") // Handle floats
+        if (str[str.length() - 1] == 'f') // Handle floats
         {
             try
             {
