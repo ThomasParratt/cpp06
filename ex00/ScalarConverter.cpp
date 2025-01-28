@@ -82,7 +82,7 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Invalid float input (Out of range)" << std::endl;
+                std::cout << "Error: Invalid float input (Out of range)" << std::endl; //INFINITY??
             }
         }
         else // Handle doubles
@@ -97,7 +97,7 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Double is out of range" << std::endl;
+                std::cout << "Error: Double is out of range" << std::endl; //INFINITY??
             }
         }
     }
@@ -111,7 +111,7 @@ void ScalarConverter::convert(std::string str)
         }
         catch (const std::exception& e)
         {
-            std::cout << "Error: Invalid float" << std::endl;
+            std::cout << "Error: Invalid float" << std::endl; //INFINITY??
         }
     }
     else // No decimal point. Possible integer, double or char
@@ -145,7 +145,7 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Double is out of range" << std::endl;
+                std::cout << "Error: Double is out of range" << std::endl; //INFINITY??
             }
         }
     }
