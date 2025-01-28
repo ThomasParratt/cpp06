@@ -49,7 +49,6 @@ void ScalarConverter::convert(std::string str)
     bool    i = false;
     bool    f = false;
     bool    d = false;
-    bool    special = false;
 
     if (!valid(str))
     {
@@ -64,16 +63,14 @@ void ScalarConverter::convert(std::string str)
         std::cout << "literal type is char" << std::endl;
         std::cout << "char: '" << valueC << "'" << std::endl;
         std::cout << "int: " << static_cast<int>(valueC) << std::endl;
-        std::cout << "float: " << static_cast<float>(valueC) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(valueC) << ".0" << std::endl;
+        std::cout << "float: " << static_cast<float>(valueC) << "f" << std::endl;
+        std::cout << "double: " << static_cast<double>(valueC) << std::endl;
     }
     else if (str.find('.') != std::string::npos || 
         str == "-inff" || str == "+inff" || str == "+inf" || str == "-inf" || str == "nan" || str == "nanf")
     {
         if (str[str.length() - 1] == 'f' && str != "+inf" && str != "-inf") // Handle floats
         {
-            if (str == "+inff" || str == "-inff" || str == "nanf")
-                special = true;
             try
             {
                 valueF = std::stof(str);
@@ -82,13 +79,11 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Invalid float input (Out of range)" << std::endl; //INFINITY??
+                std::cout << "Error: Invalid float input (Out of range)" << std::endl;
             }
         }
         else // Handle doubles
         {
-            if (str == "+inf" || str == "-inf" || str == "nan")
-                special = true;
             try
             {
                 valueD = std::stod(str);
@@ -97,7 +92,7 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Double is out of range" << std::endl; //INFINITY??
+                std::cout << "Error: Double is out of range" << std::endl;
             }
         }
     }
@@ -111,7 +106,7 @@ void ScalarConverter::convert(std::string str)
         }
         catch (const std::exception& e)
         {
-            std::cout << "Error: Invalid float" << std::endl; //INFINITY??
+            std::cout << "Error: Invalid float" << std::endl;
         }
     }
     else // No decimal point. Possible integer, double or char
@@ -131,8 +126,8 @@ void ScalarConverter::convert(std::string str)
                 std::cout << "char: '" << valueC << "'" << std::endl;
             }
             std::cout << "int: " << static_cast<int>(valueC) << std::endl;
-            std::cout << "float: " << static_cast<float>(valueC) << ".0f" << std::endl;
-            std::cout << "double: " << static_cast<double>(valueC) << ".0" << std::endl;
+            std::cout << "float: " << static_cast<float>(valueC) << "f" << std::endl;
+            std::cout << "double: " << static_cast<double>(valueC) << std::endl;
         }
         catch (const std::out_of_range& e)
         {
@@ -145,7 +140,7 @@ void ScalarConverter::convert(std::string str)
             }
             catch (const std::out_of_range& e)
             {
-                std::cout << "Error: Double is out of range" << std::endl; //INFINITY??
+                std::cout << "Error: Double is out of range" << std::endl;
             }
         }
     }
@@ -161,8 +156,8 @@ void ScalarConverter::convert(std::string str)
         else
             std::cout << "char: impossible" << std::endl;
         std::cout << "int: " << valueI << std::endl;
-        std::cout << "float: " << static_cast<float>(valueI) << ".0f" << std::endl;
-        std::cout << "double: " << static_cast<double>(valueI) << ".0" << std::endl;
+        std::cout << "float: " << static_cast<float>(valueI) << "f" << std::endl;
+        std::cout << "double: " << static_cast<double>(valueI) << std::endl;
     }
     if (f)
     {
@@ -178,18 +173,8 @@ void ScalarConverter::convert(std::string str)
         else
             std::cout << "int: " << static_cast<int>(valueF) << std::endl;
 
-
-        if ((valueF == std::floor(valueF)) && !special)
-        {
-            std::cout << "float: " << valueF << ".0f" << std::endl;
-            std::cout << "double: " << static_cast<double>(valueF) << ".0" << std::endl;
-        }
-        else
-        {
-            std::cout << "float: " << valueF << "f" << std::endl;
-            std::cout << "double: " << static_cast<double>(valueF) << std::endl;
-        }
-            
+        std::cout << "float: " << valueF << "f" << std::endl;
+        std::cout << "double: " << static_cast<double>(valueF) << std::endl;
     }
     if (d)
     {
@@ -206,16 +191,7 @@ void ScalarConverter::convert(std::string str)
         else
             std::cout << "int: " << static_cast<int>(valueD) << std::endl;
 
-
-        if ((valueD == std::floor(valueD)) && !special)
-        {
-            std::cout << "float: " << static_cast<float>(valueD) << ".0f" << std::endl;
-            std::cout << "double: " << valueD << ".0" << std::endl;
-        }
-        else
-        {
-            std::cout << "float: " << static_cast<float>(valueD) << "f" << std::endl;
-            std::cout << "double: " << valueD << std::endl; 
-        }  
+        std::cout << "float: " << static_cast<float>(valueD) << "f" << std::endl;
+        std::cout << "double: " << valueD << std::endl; 
     }
 }
