@@ -57,7 +57,6 @@ Base * generate(void)
         case 3:
             std::cout << "C generated" << std::endl;
             return (new C);
-            break ;
         default:
             return (nullptr);
     }
